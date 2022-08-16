@@ -87,10 +87,8 @@ public class OktmoData {
     }
 
     public Place findLargestRegionName(int code1) {
-        List<Place> placesList = findRegionPlaces(code1)
-                .sorted(Comparator.comparingInt(o -> -o.getName().length()))
-                .collect(Collectors.toList());
-        return placesList.get(0);
+        return  findRegionPlaces(code1).min(Comparator.comparingInt(o -> -o.getName().length()))
+                .orElse(null);
     }
 
     public Map<String, Long> findNamePopularity() {
